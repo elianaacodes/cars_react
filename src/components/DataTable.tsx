@@ -27,15 +27,15 @@ function DataTable() {
     setOpen(false)
   }
   
-  const deleteData = () => {
-    server_calls.delete(selectionModel[0]);
-    console.log(`Deleted: ${selectionModel[0]}`)
-    setTimeout(() => { 
-      getData();
-      window.location.reload() 
-    }, 1000)
+  const deleteData = async () => {
+    if (selectionModel.length > 0) {
+      await server_calls.delete(selectionModel[0]);
+      // Remove the deleted item from the selection model
+      setSelectionModel(prevState => prevState.filter(item => item !== selectionModel[0]));
+      await getData();
+    }
   }
-
+  
   return (
     <>
         <Modal 
