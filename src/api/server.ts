@@ -43,7 +43,7 @@ export const server_calls = {
     },
 
     update: async (id:string, data: any = {}) => {
-        const response = await fetch(`https://flasktrial3.onrender.com/api/cars/{id}`,
+        const response = await fetch(`https://flasktrial3.onrender.com/api/cars/<id>`,
         {
             method: "POST",
             headers: {
@@ -62,7 +62,7 @@ export const server_calls = {
     },
 
     delete: async (id:string) => {
-        const response = await fetch(`https://flasktrial3.onrender.com/api/cars/{id}`,
+        const response = await fetch(`https://flasktrial3.onrender.com/api/cars/<id>`,
         {
             method: "DELETE",
             headers: {
