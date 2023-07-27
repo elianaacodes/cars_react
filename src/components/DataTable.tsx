@@ -10,7 +10,6 @@ import { useGetData } from '../custom-hooks/FetchData';
 import { Box, Typography } from '@mui/material';
 
 const columns: GridColDef[] = [
-  { field: 'id', headerName: "ID", width: 90, hideable: true },
   { field: 'vin', headerName: 'VIN', flex: 1 },
   { field: 'make', headerName: 'Make', flex: 1},
   { field: 'model', headerName: 'Model', flex: 1},
@@ -36,8 +35,8 @@ function DataTable() {
   const deleteData = () => {
     server_calls.delete(selectionModel[0]);
     getData();
-    console.log(`Selection model: ${selectionModel}`)
-    setTimeout( () => { window.location.reload() }, 500)
+    console.log(`Selection model: ${selectionModel[1]}`)
+    setTimeout( () => { window.location.reload() }, 500000000000000)
   }
 
   return (
