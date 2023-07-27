@@ -5,7 +5,7 @@ const token = '06a146580fbffe6e6e9aee9bd8ae9b53da7f293b57cc4bf3'
 
 export const server_calls = {
     get: async () => {
-        const response = await fetch(`https://flasktrial3.onrender.com/cars`,
+        const response = await fetch(`https://flasktrial3.onrender.com/api/cars`,
         // change url to my url once set up
         {
             method: 'GET',
@@ -24,7 +24,7 @@ export const server_calls = {
     },
 
     create: async (data: any = {}) => {
-        const response = await fetch(`https://flasktrial3.onrender.com/cars`,
+        const response = await fetch(`https://flasktrial3.onrender.com/api/cars`,
         {
             method: "POST",
             headers: {
@@ -43,7 +43,7 @@ export const server_calls = {
     },
 
     update: async (id:string, data: any = {}) => {
-        const response = await fetch(`https://flasktrial3.onrender.com/cars/${id}`,
+        const response = await fetch(`https://flasktrial3.onrender.com/api/cars/{id}`,
         {
             method: "POST",
             headers: {
@@ -62,7 +62,7 @@ export const server_calls = {
     },
 
     delete: async (id:string) => {
-        const response = await fetch(`https://flasktrial3.onrender.com/cars${id}`,
+        const response = await fetch(`https://flasktrial3.onrender.com/api/cars/{id}`,
         {
             method: "DELETE",
             headers: {
