@@ -1,4 +1,4 @@
-const token = '5586ee43007030665d6029eb45ece269ad8dd55117107edf'
+const token = '002def80ca63b60610b65ed0688d72cd1c0364f7ab43e5c7'
 
 export const server_calls = {
     get: async () => {
