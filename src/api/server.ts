@@ -1,7 +1,4 @@
-const token = '06a146580fbffe6e6e9aee9bd8ae9b53da7f293b57cc4bf3'
-
-// const token = '27f4d250d324ba15d3f9e28b7d0998ef80954c8a63bdcde0'
-// if using flask token enter above and modify links below
+const token = '5586ee43007030665d6029eb45ece269ad8dd55117107edf'
 
 export const server_calls = {
     get: async () => {
