@@ -18,17 +18,22 @@ function DataTable() {
   const [open, setOpen] = useState(false);
   const { carData, getData } = useGetData();
   const [selectionModel, setSelectionModel] = useState<string[]>([])
-  
-  const handleOpen = () => {
-    setOpen(true)
+  const handleCreate = () => {
+    setOpen(true);
+  }
+  const handleUpdate = () => {
+    if (selectionModel?.length > 0) {
+      setOpen(true);
+    }
   }
 
   const handleClose = () => {
-    setOpen(false)
+    setOpen(false);
   }
   
   const deleteData = async () => {
-    if (selectionModel.length > 0) {
+    console.log(selectionModel, "selectionModel");
+    if (selectionModel?.length > 0) {
       await server_calls.delete(selectionModel[0]);
       // Remove the deleted item from the selection model
       setSelectionModel(prevState => prevState.filter(item => item !== selectionModel[0]));
@@ -39,19 +44,19 @@ function DataTable() {
   return (
     <>
         <Modal 
-            id={selectionModel}
+            id={selectionModel[0]}
             open={open}
             onClose={handleClose}/>
         <div className="flex flex-row p-3 justify-items-center bg-slate-300 m-3 rounded hover:bg-slate-700 hover:text-white">
             <div className="flex flex-row">
                 <button
                     className="p-3 bg-slate-300 m-3 rounded hover:bg-slate-800 hover:text-white"
-                    onClick={() => handleOpen()}
+                    onClick={() => handleCreate()}
                 >
                   Create New Car
                 </button>
             </div>
-            <Button onClick={handleOpen} className="p-3 bg-slate-300 m-3 rounded hover:bg-slate-500 hover:text-white" >Update</Button>
+            <Button onClick={handleUpdate} className="p-3 bg-slate-300 m-3 rounded hover:bg-slate-500 hover:text-white" >Update</Button>
             <Button onClick={deleteData} className="p-3 bg-slate-300 m-3 rounded hover:bg-slate-500 hover:text-white" >Delete</Button>
         </div>
         <div className={ open ? "hidden" : "container mx-10 my-5 flex flex-col"}
@@ -63,7 +68,9 @@ function DataTable() {
               columns={columns}  
               checkboxSelection={true}
               getRowId={(row) => row.vin}
-              onRowSelectionModelChange={ (item:any) => {setSelectionModel(item.selectionModel)}
+              onRowSelectionModelChange={ (item:any) => {
+                setSelectionModel(item)
+              }
               }
             />
         </div>

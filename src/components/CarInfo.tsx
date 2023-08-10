@@ -1,48 +1,70 @@
-import Button from "./Button"
-import Input from "./Input"
-import { useForm } from 'react-hook-form'
-import { server_calls } from '../api/server'
-import { useDispatch, useStore } from 'react-redux';
-import { chooseVIN, chooseMake, chooseModel, chooseYear, chooseColor } from "../redux/slices/RootSlice";
+import React from 'react';
+import Button from './Button';
+import Input from './Input';
+import { useForm } from 'react-hook-form';
+import { server_calls } from '../api/server';
+import { useDispatch, useSelector } from 'react-redux';
+
 
 interface CarInfoProps {
-  vin?: string; // Change the ID type to string
+  id?: string;
 }
 
 const CarInfo = (props: CarInfoProps) => {
-  const { register, handleSubmit } = useForm({})
+  console.log(props,"props")
+  const { register, handleSubmit } = useForm();
   const dispatch = useDispatch();
-  const store = useStore();
+  const store = useSelector((state) => state); // Replace with your actual state selector
 
-  const onSubmit = (data: any, event: any) => {
-    console.log(`VIN: ${props.vin}`);
+  const onSubmit = async (data: any, event: any) => {
+    console.log(`VIN: ${props.id}`);
     console.log(data);
 
-    if (props.vin) {
-      // Use VIN as the ID when updating
-      server_calls.update(props.vin, data)
-      console.log(`Updated: ${data.vin} ${props.vin}`)
-      setTimeout(() => { window.location.reload() }, 5000);
+    if (props.id) {
+      server_calls.update(props.id, data);
+      console.log(`Updated: ${data.vin} ${props.id}`);
+      setTimeout(() => {
+        window.location.reload();
+      }, 1000);
       event.target.reset();
     } else {
-      // Use dispatch to update our state in our store
-      dispatch(chooseVIN(data.vin));
-      dispatch(chooseMake(data.make));
-      dispatch(chooseModel(data.model));
-      dispatch(chooseYear(data.year));
-      dispatch(chooseColor(data.color));
-      server_calls.create(store.getState())
-      setTimeout(() => { window.location.reload() }, 5000);
+      await server_calls.create(data);
+      setTimeout(() => { window.location.reload() }, 1000);
     }
-  }
+  };
 
   return (
     <div>
       <form onSubmit={handleSubmit(onSubmit)} className="flex-wrap min-w-full min-h-full">
-        {/* Your form fields and submit button */}
+        <Input
+          label="VIN"
+          {...register('vin', { required: true })}
+          type="text" // Specify the input type
+        />
+        <Input
+          label="Make"
+          {...register('make', { required: true })}
+          type="text" // Specify the input type
+        />
+        <Input
+          label="Model"
+          {...register('model', { required: true })}
+          type="text" // Specify the input type
+        />
+        <Input
+          label="Year"
+          {...register('year', { required: true })}
+          type="number" // Specify the input type
+        />
+        <Input
+          label="Color"
+          {...register('color', { required: true })}
+          type="text" // Specify the input type
+        />
+        <Button type="submit">{props.id ? 'Update Car' : 'Create Car'}</Button>
       </form>
     </div>
-  )
-}
+  );
+};
 
 export default CarInfo;

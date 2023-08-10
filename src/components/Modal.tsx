@@ -3,7 +3,7 @@ import CarInfo from './CarInfo';
 // import Background from '../assets/images/';
 
 type Props = {
-    id?: string[];
+    id?: string;
     open: boolean;
     onClose: () => void;
 }
