@@ -4,8 +4,7 @@ import { TextField } from '@mui/material'
 interface InputType {
   name: string,
   placeholder: string,
-  type: string,
-  pattern: string,
+  //pattern: string,
 
 }
 
@@ -16,6 +15,7 @@ const Input = forwardRef((props: InputType, ref) => {
         margin="normal"
         inputRef={ref}
         fullWidth
+        type='text'
         {...props} // 'spread operator'
     >
     </TextField>

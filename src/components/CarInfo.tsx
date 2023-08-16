@@ -25,7 +25,7 @@ const CarInfo = (props: CarInfoProps) => {
       console.log(`Updated: ${data.vin} ${props.id}`);
       setTimeout(() => {
         window.location.reload();
-      }, 1000);
+      }, 100000);
       event.target.reset();
     } else {
       await server_calls.create(data);
@@ -36,32 +36,32 @@ const CarInfo = (props: CarInfoProps) => {
   return (
     <div>
       <form onSubmit={handleSubmit(onSubmit)} className="flex-wrap min-w-full min-h-full">
+      <label htmlFor="VIN">VIN</label>
         <Input
-          label="VIN"
           {...register('vin', { required: true })}
-          type="text" // Specify the input type
+          placeholder='vin'
         />
+        <label htmlFor="Make">Make</label>
         <Input
-          label="Make"
           {...register('make', { required: true })}
-          type="text" // Specify the input type
+          placeholder='make'
         />
+        <label htmlFor="Model">Model</label>
         <Input
-          label="Model"
           {...register('model', { required: true })}
-          type="text" // Specify the input type
+          placeholder='model'
         />
+        <label htmlFor="Year">Year</label>
         <Input
-          label="Year"
           {...register('year', { required: true })}
-          type="number" // Specify the input type
+          placeholder='Year'
         />
+        <label htmlFor="Color">Color</label>
         <Input
-          label="Color"
           {...register('color', { required: true })}
-          type="text" // Specify the input type
+          placeholder='Color'
         />
-        <Button type="submit">{props.id ? 'Update Car' : 'Create Car'}</Button>
+        <Button>{props.id ? 'Update Car' : 'Create Car'}</Button>
       </form>
     </div>
   );
